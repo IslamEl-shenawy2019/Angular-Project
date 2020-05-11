@@ -1,1 +1,40 @@
-<p>add-student works!</p>
+<form #f="ngForm" (ngSubmit)="Submit(f)" class="form-group container">
+    <label for="Name">Student Name :-</label> 
+    <input required minlength="8" maxlength="15" ngModel name="stdName" #stdName="ngModel" id="Name" type="text" class="form-control">
+    <div class="alert alert-danger" *ngIf="stdName.touched && !stdName.valid">
+        <div class="alert alert-danger" *ngIf="stdName.errors?.required">
+            Student Name is required
+        </div>
+        <div class="alert alert-danger" *ngIf="stdName.errors?.minlength">
+            Student Name Must be More than {{stdName.errors.minlength.requiredLength}}
+        </div>
+        <div class="alert alert-danger" *ngIf="stdName.errors?.maxlength">
+            Student Name Must be less than {{stdName.errors.maxlength.requiredLength}}
+        </div>
+    </div>
+    <label for="Age"> Student Age: </label>
+    <input ngModel name="stdAge" #stdAge="ngModel" id="Age" type="number" class="form-control">
+    <div class="alert alert-danger" *ngIf="stdAge.touched && !stdEmail.valid">
+        <div class="alert alert-danger" *ngIf="stdAge.value < 18 ">
+            Student age required and Must be More than 18
+        </div>
+        <div class="alert alert-danger" *ngIf="stdAge.value > 60">
+            Student age Must be less than 60
+        </div>
+    </div> 
+    <label for="email"> Student Email :- </label>
+    <input required class="form-control" ngModel name="stdEmail" #stdEmail="ngModel" email type="text">
+    <div class="alert alert-danger" *ngIf="stdEmail.touched && !stdEmail.valid">
+        <div class="alert alert-danger" *ngIf="stdEmail.errors?.required">
+            Student Email is required
+        </div>
+        <div class="alert alert-danger" *ngIf="stdEmail.errors?.email">
+            Email not valid
+        </div>    
+    </div>
+    <label for="profilepic">Profile Picture :- </label>
+    <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+    <br>
+    <br>  
+    <button style="margin-left: 200px;" class="btn btn-primary" [disabled]="!f.valid"> Add Student </button> 
+</form>
