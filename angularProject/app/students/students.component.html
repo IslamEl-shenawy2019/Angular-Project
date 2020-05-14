@@ -1,0 +1,22 @@
+<div *ngFor="let item of Students">
+    
+    <div class="col-12">
+        
+        <div class="d-inline" *ngIf="item.ProfilePicture!=null">
+            <img  class="rounded-circle  col-2" src= {{item.ProfilePicture}} width="200px" height="200px">    
+        </div>
+
+        <div class="d-inline" *ngIf="item.ProfilePicture==null">
+            <img  class="rounded-circle  col-2" src= "assets/unknown.jpg" width="200px" height="200px">    
+        </div>
+         
+        
+        <a class="offset-3 col-7" routerLink='/Profile/{{item.ID}}' >
+            <h4 class="d-inline">{{item.Name}}</h4>
+        </a>
+        <hr/>
+    </div>
+
+
+</div>
+

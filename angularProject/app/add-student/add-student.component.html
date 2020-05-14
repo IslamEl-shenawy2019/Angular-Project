@@ -1,0 +1,40 @@
+<form #f="ngForm" (ngSubmit)="Submit(f)" class="form-group container">
+    <label for="Name">Student Name :-</label> 
+    <input required maxlength="8" ngModel name="Name" #Name="ngModel" id="Name" type="text" class="form-control">
+    <div class="alert alert-danger" *ngIf="Name.touched && !Name.valid">
+        <div class="alert alert-danger" *ngIf="Name.errors?.required">
+            Student Name is required
+        </div>
+        <!-- <div class="alert alert-danger" *ngIf="Name.errors?.minlength">
+            Student Name Must be More than {{Name.errors.minlength.requiredLength}}
+        </div> -->
+        <div class="alert alert-danger" *ngIf="Name.errors?.maxlength">
+            Student Name Must be less than {{Name.errors.maxlength.requiredLength}}
+        </div>
+    </div>
+    <label for="Age"> Student Age: </label>
+    <input ngModel name="Age" #Age="ngModel" id="Age" type="number" class="form-control">
+    <div class="alert alert-danger" *ngIf="Age.touched && Age.value<18">
+        <div class="alert alert-danger" *ngIf="Age?.value < 18 ">
+            Student age required and Must be More than 18
+        </div>
+        <div class="alert alert-danger" *ngIf="Age?.value > 60">
+            Student age Must be less than 60
+        </div>
+    </div> 
+    <label for="email"> Student Email :- </label>
+    <input required class="form-control" ngModel name="Email" #Email="ngModel" email type="text">
+    <div class="alert alert-danger" *ngIf="Email.touched && !Email.valid">
+        <div class="alert alert-danger" *ngIf="Email.errors?.required">
+            Student Email is required
+        </div>
+        <div class="alert alert-danger" *ngIf="Email.errors?.email">
+            Email not valid
+        </div>    
+    </div>
+    <label for="profilepic">Profile Picture :- </label>
+    <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+    <br>
+    <br>  
+    <button style="margin-left: 200px;" class="btn btn-primary" [disabled]="!f.valid"> Add Student </button> 
+</form>
