@@ -1,0 +1,40 @@
+
+
+<div class="container">
+  <div *ngIf="Student.ProfilePicture!=null" class="text-center">
+    <img src="{{Student.ProfilePicture}}" width="200px" height="200px">
+  </div>
+
+  <div *ngIf="Student.ProfilePicture==null" class="text-center">
+    <img src="assets/unknown.jpg" width="200px" height="200px">
+  </div>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+      <input type="number" formControlName="ID" value="{{Student.ID}}" hidden>
+
+      <div class="form-group">
+          <label >Name</label>
+          <input type="text" formControlName="Name" class="form-control" placeholder="Enter name" value="{{Student.Name}}">
+
+        </div>
+      <div class="form-group">
+          <label>Email address</label>
+          <input type="email" formControlName="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{Student.Email}}" placeholder="Enter email">
+        </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" formControlName="Age" class="form-control" placeholder="Enter email" value="{{Student.Age}}" min="18" max="60">
+      </div>
+      <input type="text" formControlName="ProfilePicture" hidden>
+      <!-- <p>
+        Form Status: {{ profileForm.status }}
+      </p> -->
+      <div class="text-center">
+        <button [disabled]="profileForm.status=='INVALID'" type="submit" class="btn btn-primary">Edit</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button (click)="deleteStudent()" type="button" class="btn btn-danger"> Delete </button>
+      </div>
+    </form>
+</div>
+
